@@ -16,12 +16,21 @@ const secret = 'O4kyEkoJkbFd5OfhhPaYja1c8GHtSPyI9W1eCyBc';
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+
+
+
+
+
 router.get('/', function (req, res) {
   res.render("card")
 });
 
 router.get("/js", (req, res) => {
     res.sendFile(path.join(__dirname,"/app.js"));    
+});
+
+router.post('/user', (req,res) => {
+res.json({msg:"key:", res})
 });
 
 app.use("/", router)

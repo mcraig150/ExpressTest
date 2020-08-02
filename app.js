@@ -12,7 +12,7 @@ parm.append("grant_type", "client_credentials")
 parm.append("client_id", key);
 parm.append("client_secret",secret)
 
-const petRes = await fetch(
+const petToken = await fetch(
     'https://api.petfinder.com/v2/oauth2/token',
     {
         method: 'POST',
@@ -20,12 +20,34 @@ const petRes = await fetch(
     }
 )
 
-let obj = await petRes.json();
+let obj = await petToken.json();
 
-let token = obj.access_token;
-console.log(obj);
 
+//console.log(obj);
+ sendData(obj)
+}
+async function sendData(data) {
+console.log(data.access_token);
+
+
+
+
+
+const getPets = await fetch(
+    'https://api.petfinder.com/v2/types',
+    {
+        headers: {
+            Authorization: `Bearer ${data.access_token}`,
+            Accept: '*/*',
+            Host: 'api.petfinder.com'
+
+        }
+    });
+
+    console.log(getPets);
 }
 
+
 getToken();
+
 
